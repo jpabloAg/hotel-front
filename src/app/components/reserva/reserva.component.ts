@@ -13,7 +13,6 @@ import { Cliente } from '../../modelos/cliente';
   styleUrls: ['./reserva.component.css']
 })
 export class ReservaComponent implements OnInit {
-  regex = '/%2F/gi'
   public codigoHabitacion:number;
   public fechaIngreso:string;
   public fechaSalida:string;
@@ -49,21 +48,21 @@ export class ReservaComponent implements OnInit {
   reservar(formReserva, reservaModal){
     
     this.reserva.numeroHabitacion = this.codigoHabitacion;
-    this.reserva.fechaIngreso = this.fechaIngreso;
-    this.reserva.fechaSalida = this.fechaSalida;
-    this.reserva.cedulaCliente = this.cliente.cedula;
+    this.reserva.fechaIngreso = new Date(this.fechaIngreso);
+    this.reserva.fechaSalida = new Date(this.fechaSalida);
+    this.reserva.cedulaCliente = "1";
     
     
-    //this._clienteService.registrarCliente(this.cliente);
-    /*this._reservaService.registrarReservar(this.reserva).subscribe(
+   // this._clienteService.registrarCliente(this.cliente);
+    this._reservaService.registrarReservar(this.reserva).subscribe(
       response => {
-        this.codiogReserva = response.codigoReserva;
+        this.codigoReserva = response.codigoReserva;
         this.fechaIngreso = ''; 
         this.fechaSalida = '';
         formReserva.reset();
         this._modalService.open(reservaModal);
       }
-    )*/
+    )
     
   }
 }

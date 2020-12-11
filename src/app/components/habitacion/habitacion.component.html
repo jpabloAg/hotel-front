@@ -16,7 +16,7 @@
 
 
 
-<div class="container ">
+<div class="container " *ngIf="habitacion">
     <div class="row row-cols-2">
         <div class="col-md-8">
             <h2>{{ habitacion.nombre }}</h2>
@@ -58,11 +58,11 @@
     </div>
 </div>
 
-<div class="container moreInfo">
+<div class="container moreInfo" *ngIf="habitacion">
     <div class="row row-cols-3">
         <div class="col-md-8">
             <h3>Más información</h3>
-            <p>{{ habitacion.descripcion2 }}</p>
+            <p>{{ habitacion.descripcio2 }}</p>
         </div>
         <div class="col-md-4">
             <h3>Propiedades</h3>
@@ -72,10 +72,10 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="habitacion">
     <h3>Servicios</h3>
     <ul>
-        <li *ngFor="let servicio of habitacion.servicios" style="list-style:none;">
+        <li *ngFor="let servicio of habitacion.serviciosCollection" style="list-style:none;">
             <p *ngIf="servicio.codigoServicio==1"><i class="fas fa-2x fa-snowflake"></i> {{ servicio.servicio }}</p>
             <p *ngIf="servicio.codigoServicio==2"><i class="fas fa-2x fa-tv"></i> {{ servicio.servicio }}</p>
             <p *ngIf="servicio.codigoServicio==3"><i class="fas fa-2x fa-wifi"></i> {{ servicio.servicio }}</p>

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReservaService {
-  url:string = 'http://localhost:8080';
+  url:string = 'http://localhost:8080/tiposHabitaciones';
   constructor(private _http:HttpClient) { }
 
   public verificarDisponibilidad(codigo:string, fechaIngreso:string, fechaSalida:string):Observable<number>{
@@ -17,7 +17,7 @@ export class ReservaService {
   public registrarReservar(reserva:Reserva):Observable<Reserva>{
     let params = JSON.stringify(reserva);
     let headers = new HttpHeaders().set('content-type', 'application/json');
-    return this._http.post<Reserva>(`${this.url}/reserva`, params, { headers:headers });
+    return this._http.post<Reserva>(`${this.url}/reserva`, reserva);
   }
 
   public buscarReserva(codigoReserva:string):Observable<Reserva>{
@@ -29,6 +29,6 @@ export class ReservaService {
   }
 
   public actualizarReserva(reserva:Reserva):Observable<Reserva>{
-    return this._http.put<Reserva>(`${this.url}/reserva?codigo=${reserva.codigoReserva}`, reserva);
+    return this._http.post<Reserva>(`${this.url}/reserva`, reserva);
   }
 }

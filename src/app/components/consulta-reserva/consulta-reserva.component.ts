@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReservaService } from 'src/app/servicios/reserva.service';
 import { Reserva } from '../../modelos/reserva';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router }  from '@angular/router';
 @Component({
   selector: 'app-consulta-reserva',
   templateUrl: './consulta-reserva.component.html',
@@ -14,7 +15,7 @@ export class ConsultaReservaComponent implements OnInit {
   public fechaIngreso:any;
   public fechaSalida:any;
   constructor(private _reservaService:ReservaService,
-              private _modalService:NgbModal) { 
+              private _modalService:NgbModal, private _router:Router) { 
     this.codigoReserva = '';
   }
 
@@ -22,32 +23,26 @@ export class ConsultaReservaComponent implements OnInit {
   }
 
   buscarReserva(){
-    this.reserva = {
-      cedulaCliente:'123456',
-      codigoReserva:'00025',
-      fechaIngreso:'12/9/2020',
-      fechaSalida:'12/25/2020',
-      numeroHabitacion:5
-    }
-    /*this._reservaService.buscarReserva(this.codigoReserva).subscribe(
+  
+    this._reservaService.buscarReserva(this.codigoReserva).subscribe(
       response => {
         this.reserva = response;
       }
-    )*/
+    )
   }
 
   eliminarReserva(deleteModal){
     this._reservaService.cancelarReserva(this.codigoReserva).subscribe(
       response => {
         this.reservaElminada = response;
-        this._modalService.open(deleteModal);
+        this._router.navigate(['home']);
       }
     );
   }
 
   actualizarReserva(reservaUp){
-    this.fechaIngreso = this.formatearFecha(this.fechaIngreso);
-    this.fechaSalida = this.formatearFecha(this.fechaSalida);
+    this.fechaIngreso = new Date(this.fechaIngreso);
+    this.fechaSalida = new Date(this.fechaSalida);
     reservaUp.fechaIngreso = this.fechaIngreso;
     reservaUp.fechaSalida= this.fechaSalida;
     this._reservaService.actualizarReserva(reservaUp).subscribe(

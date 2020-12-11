@@ -1,7 +1,7 @@
 export interface Reserva{
     codigoReserva:string;
     numeroHabitacion:number;
-    fechaIngreso:string;
-    fechaSalida:string;
+    fechaIngreso:any;
+    fechaSalida:any;
     cedulaCliente:string;
 }

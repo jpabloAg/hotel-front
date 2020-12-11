@@ -7,12 +7,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClienteService {
-  url:string = 'http://localhost:8080';
+  url:string = 'http://localhost:8080/tiposHabitaciones/cliente';
   constructor(private _http:HttpClient) { }
 
   public registrarCliente(cliente:Cliente):Observable<Cliente>{
     let params = JSON.stringify(cliente);
     let headers = new HttpHeaders().set('content-type', 'application/json');
-    return this._http.post<Cliente>(`${this.url}/cliente`, params, { headers:headers });
+    console.log(cliente);
+    return this._http.post<Cliente>(this.url, cliente);
   }
 }
