@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HospedajeService {
-  url:string = 'http://localhost:8080';
+  url:string = 'https://reservas-udea.herokuapp.com';
   constructor(private _http:HttpClient) { }
 
   public getHospedajes():Observable<TipoHabitacion[]>{
